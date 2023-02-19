@@ -1,24 +1,56 @@
-import logo from './logo.svg';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import { GlobalStyle } from './styles/GlobalStyle';
 import './App.css';
+
+// 컴포넌트
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
+
+/* Internal libraries */
+import Home from './pages/Home/Home';
+
+// 레이아웃 네브바 푸터
+const Layout = () => {
+  return (
+    <div>
+      <Navbar />
+
+      <Outlet />
+
+      <Footer />
+    </div>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            {/* 
+            booth
+            <Route path="booth/" element={<BoothLayout />}>
+              <Route path="" element={<Booth />} />
+              <Route path="Search" element={<BoothSearch />} />
+            </Route>
+
+            <Route path="booth/:id" element={<BoothDetail />} />
+            <Route path="booth/:id/edit" element={<BoothDetailEdit />} />
+            <Route
+              path="booth/:boothId/comment/:commentId"
+              element={<GuestDelete />}
+            />
+            <Route path="notice" element={<Notice />} />
+            <Route path="notice/:id" element={<NoticeDetail />} />
+            <Route path="timetable" element={<TimeTable />} /> */}
+          </Route>
+        </Routes>
+      </div>
+    </>
   );
 }
 
